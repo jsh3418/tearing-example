@@ -15,7 +15,7 @@ function UnsafeCell({ id }: { id: number }) {
   const colorIndex = externalStore.getColorIndex();
 
   // ~5ms busy-wait: React의 time-slice(5ms)를 소진시켜 yield를 유도
-  // yield하는 동안 setInterval 콜백이 실행되어 스토어를 변경할 수 있음
+  // 컴포넌트 함수 반환 후 React가 yield한 틈에 setInterval 콜백이 실행되어 스토어를 변경
   const start = performance.now();
   while (performance.now() - start < 5) {}
 
@@ -61,7 +61,7 @@ export default function UnsafeGrid() {
     };
   }, []);
 
-  // tick을 key에 반영하여 transition 때 셀 트리가 재생성되도록 함
+  // setTick으로 상태를 변경하여 리렌더링을 유발
   const cells = [];
   for (let i = 0; i < CELL_COUNT; i++) {
     cells.push(<UnsafeCell key={i} id={i} />);
@@ -87,9 +87,9 @@ export default function UnsafeGrid() {
           <code>startTransition</code> 안의 렌더링은 중단 가능합니다. 각 셀이
           ~5ms 동안 렌더링되면서 React의 time-slice를 소진하면, React는 메인
           스레드에 양보(yield)합니다. 이 틈에 <code>setInterval</code>이
-          실행되어 외부 스토어를 변경합니다. React가 돌아와서 다음 셀을
-          렌더링할 때 <strong>변경된 값</strong>을 읽게 되어, 같은 렌더
-          패스인데도 셀마다 다른 색상이 표시됩니다.
+          실행되어 외부 스토어를 변경합니다. React가 돌아와서 다음 셀을 렌더링할
+          때 <strong>변경된 값</strong>을 읽게 되어, 같은 렌더 패스인데도 셀마다
+          다른 색상이 표시됩니다.
         </p>
       </div>
     </div>

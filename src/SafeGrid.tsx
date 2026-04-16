@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState, useTransition, useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  useTransition,
+} from "react";
 import { COLORS, COLOR_NAMES, safeStore } from "./externalStore";
 
 /**
