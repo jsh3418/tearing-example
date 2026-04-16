@@ -37,6 +37,28 @@ body {
   font-size: 1.05rem;
 }
 
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1a1a2e;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.github-link:hover {
+  border-color: #555;
+  color: #fff;
+  background: #2a2a4a;
+  transform: translateY(-1px);
+}
+
 /* ── Concept Box ── */
 .concept-box {
   background: #1a1a2e;
